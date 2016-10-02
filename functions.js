@@ -23,6 +23,7 @@ var funcs = {
     get_servers: function(a, callback) {
         switch (a) {
             case 'all':
+				connection.connect();
                 db.query('SELECT * FROM `ms_servers`', function(err, rows) {
                     if (err) throw err;
                     var r = "";
@@ -34,8 +35,10 @@ var funcs = {
                     console.log("Обновление списка обычных серверов. Всего: " + rows.length);
                     callback(null, r);
                 });
+				connection.end();
                 break;
             case 'boost':
+				connection.connect();
                 db.query('SELECT * FROM `ms_boost` ORDER BY `id` DESC', function(err, rows) {
                     if (err) throw err;
                     var r = [];
@@ -45,6 +48,7 @@ var funcs = {
                     console.log("Обновление списка boost серверов. Всего: " + rows.length);
                     callback(null, r);
                 });
+				connection.end();
                 break;
         }
     },

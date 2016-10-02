@@ -6,5 +6,4 @@ var connection = mysql.createConnection({
     password: config.db.password,
     database: config.db.database
 });
-connection.connect();
 module.exports = connection;
