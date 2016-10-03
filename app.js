@@ -42,7 +42,9 @@ server.on('message', function(message, remote) {
 		funcs.send_reply([p_start,all_servers[index]], remote, server);
 	}
 	else {
-		funcs.send_reply(p_start+p_end, remote, server);
+		setTimeout(function() {
+			funcs.send_reply(p_start+p_end, remote, server);
+		}, config.ms.delay_end_server_list * 1000);
 	}
 });
 
