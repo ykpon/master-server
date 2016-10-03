@@ -8,37 +8,31 @@ var funcs = {
             var addr = p[1].split(":");
             prepare += funcs.inet_pton(addr[0]);
             prepare += funcs.pack('n*', addr[1]);
+			prepare += p[2] ? p[2] : "";
         } else {
             prepare = p;
         }
         var reply = new Buffer(prepare, 'ascii');
         s.send(reply, 0, reply.length, r.port, r.address, function(err, bytes) {
             if (err) {
-                //console.error("Error sending OK buffer to client", err);
-            } else {
-                //console.log("OK sent to client: " + bytes);
+                console.error("Error sending OK buffer to client", err);
             }
         });
     },
     get_servers: function(a, callback) {
         switch (a) {
             case 'all':
-                connection.connect();
                 db.query('SELECT * FROM `ms_servers`', function(err, rows) {
                     if (err) throw err;
-                    var r = "";
+                    var r = [];
                     for (i = 0; i < rows.length; i++) {
-                        var addr = rows[i].addr.split(":");
-                        r += funcs.inet_pton(addr[0]);
-                        r += funcs.pack('n*', addr[1]);
+                        r[r.length] = rows[i].addr;
                     }
                     console.log("Обновление списка обычных серверов. Всего: " + rows.length);
                     callback(null, r);
                 });
-                connection.end();
                 break;
             case 'boost':
-                connection.connect();
                 db.query('SELECT * FROM `ms_boost` ORDER BY `id` DESC', function(err, rows) {
                     if (err) throw err;
                     var r = [];
@@ -48,7 +42,6 @@ var funcs = {
                     console.log("Обновление списка boost серверов. Всего: " + rows.length);
                     callback(null, r);
                 });
-                connection.end();
                 break;
         }
     },
@@ -59,7 +52,6 @@ var funcs = {
         if (m) {
             m = m[0].split('.')
             m = f(m[0]) + f(m[1]) + f(m[2]) + f(m[3])
-                // Return if 4 bytes, otherwise false.
             return m.length === 4 ? m : false
         }
         return false
