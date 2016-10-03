@@ -1,9 +1,9 @@
 var config = {};
 config.db = {
-    host: 'sql7.freesqldatabase.com', // MySQL database host
-    user: 'sql7138090', // MySQL database username
-    password: 'N9lgALdpAH', // MySQL database password
-    database: 'sql7138090' // MySQL database name
+    host: '', // MySQL database host
+    user: '', // MySQL database username
+    password: '', // MySQL database password
+    database: '' // MySQL database name
 };
 config.server = {
     host: '0.0.0.0', // Master-Server external address
