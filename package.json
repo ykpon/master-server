@@ -1,0 +1,20 @@
+{
+  "name": "master-server",
+  "version": "1.0.0",
+  "description": "Simple Node.JS Master-Server",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Papilla-Hitlers/master-server.git"
+  },
+  "author": "Mysterion",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Papilla-Hitlers/master-server/issues"
+  },
+  "homepage": "https://github.com/Papilla-Hitlers/master-server#readme",
+  "dependencies": {
+    "ip-port-regex": "^1.0.0",
+    "mysql": "^2.11.1"
+  }
+}
