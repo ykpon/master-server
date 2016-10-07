@@ -23,7 +23,7 @@ var funcs = {
         switch (a) {
             case 'all':
                 db.query('SELECT * FROM `ms_servers`', function(err, rows) {
-                    if (err) throw err;
+                    if (err) return false;
                     var r = [];
                     for (i = 0; i < rows.length; i++) {
                         r[r.length] = rows[i].addr;
@@ -34,7 +34,7 @@ var funcs = {
                 break;
             case 'boost':
                 db.query('SELECT * FROM `ms_boost` ORDER BY `id` DESC', function(err, rows) {
-                    if (err) throw err;
+                    if (err) return false;
                     var r = [];
                     for (i = 0; i < rows.length; i++) {
                         r[r.length] = rows[i].addr;
