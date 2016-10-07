@@ -3,4 +3,4 @@ Node JS master-server for valve games
 
 ## run  
 npm install  
-node app.js  
+npm start  
