@@ -29,14 +29,15 @@ server.on('listening', function() {
 });
 
 server.on('message', function(message, remote) {
-    var req_addr = message.toString('ascii').match(ipRegex())[0];
-	if(ipRegex().test(req_addr) === false) return false;
+    var req_addr = message.toString('ascii').match(ipRegex());
+    if(!req_addr) return false;
+	if(ipRegex().test(req_addr[0]) === false) return false;
 	var all_servers = servers[1].concat(servers[0]);
 	var index = 0;
-	if(req_addr == '0.0.0.0:0') {
+	if(req_addr[0] == '0.0.0.0:0') {
 		index = 0;
 	} else {
-		index = all_servers.indexOf(req_addr)+1;
+		index = all_servers.indexOf(req_addr[0])+1;
 	}
 	if(all_servers[index]) {
 		funcs.send_reply([p_start,all_servers[index]], remote, server);
